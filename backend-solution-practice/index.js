@@ -1,12 +1,18 @@
 import express from "express";
 import cors from "cors";
-import {getAllTodo, createTodo, updateTodo, deleteTodoById, searchTodo} from "./routes/todo.js"
+import {getAllTodo, createTodo, updateTodo, deleteTodoById, searchTodo, signUp, signIn, auth} from "./routes/todo.js"
 
 const app = express();
 const PORT = 3001;
 
 app.use(cors())
 app.use(express.json())
+
+app.post("/signup", signUp)
+
+app.post("/signin", signIn)
+
+app.use(auth)
 
 app.get("/todos", getAllTodo);
 
