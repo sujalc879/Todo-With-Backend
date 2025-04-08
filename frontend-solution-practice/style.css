@@ -15,6 +15,28 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+
+#logoutBtn {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    border-radius: 20px;
+    padding: 12px;
+    background-color: #e45700;
+    cursor: pointer;
+    border-style: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #fbfbfb;
+}
+
+#logoutBtn:hover {
+    scale: 1.02;
+    transition: all 0.2s;
 }
 
 .container {

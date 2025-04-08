@@ -6,7 +6,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 // fetch all existing todos
 async function fetchTodos() {
-    let fetchedTodos = await fetch(API_URL);
+    let fetchedTodos = await fetch(API_URL, {
+        headers : {
+            token : localStorage.getItem("token")
+        }
+    });
     let responseTodos = await fetchedTodos.json();
     responseTodos.forEach( todo => {
         addTodoToDom(todo)
@@ -48,6 +52,7 @@ document.getElementById("add-todo-btn").addEventListener("click", async () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                token : localStorage.getItem("token")
             },
             body: JSON.stringify(newTodo),
         })
@@ -65,7 +70,10 @@ document.getElementById("add-todo-btn").addEventListener("click", async () => {
 // deleting the Todo 
 function deleteTodo(id) {
     fetch(`${API_URL}/${id}`, {
-        method : "DELETE"
+        method : "DELETE",
+        headers : {
+            token : localStorage.getItem("token")
+        }
     })
     .then(() => {
         const todoItem = document.querySelector(`[data-id='${id}']`);
@@ -75,3 +83,9 @@ function deleteTodo(id) {
         console.log("error for deleting Todo " + error);
     })
 }
+
+// Logout The Current User
+document.getElementById("logoutBtn").addEventListener("click", () => {
+    localStorage.removeItem("token");
+    window.location.href = "login.html";
+})
